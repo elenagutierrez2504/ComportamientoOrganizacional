@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encuesta sobre Motivación y Liderazgo</title>
+<style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f5fa;color:#333;}
+    header{background:#8bbccf;color:white;padding:1.2rem;text-align:center;}
+    main{max-width:850px;margin:2rem auto;padding:1rem;background:white;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+    h2{margin-top:0;color:#3a3a7a;}
+    .question{margin-bottom:1.5rem;}
+    .question p{font-weight:bold;margin-bottom:.5rem;}
+    label{display:block;margin:.3rem 0;cursor:pointer;}
+    button{background:#3a78c3;color:#fff;border:none;padding:.7rem 1.4rem;margin-top:1rem;font-size:1rem;border-radius:8px;cursor:pointer;}
+    button:hover{background:#315ea1;}
+    #result{margin-top:2rem;padding:1.2rem;border-left:6px solid #3a78c3;background:#e9f4ff;border-radius:4px;display:none;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Encuesta sobre Motivación y Liderazgo</h1>
+  <p>Responde las siguientes preguntas y descubre tu perfil motivacional y recomendaciones de liderazgo.</p>
+</header>
+<main>
+  <form id="surveyForm">
+    <div class="question">
+      <p>1️⃣ ¿Qué aspecto te motiva más en tu trabajo diario?</p>
+      <label><input type="radio" name="q1" value="A" required> A) Sentirme reconocido/a por mi esfuerzo</label>
+      <label><input type="radio" name="q1" value="B"> B) Tener autonomía para decidir cómo hacer las tareas</label>
+      <label><input type="radio" name="q1" value="C"> C) Sentirme parte de un equipo unido</label>
+      <label><input type="radio" name="q1" value="D"> D) Alcanzar objetivos claros y desafiantes</label>
+    </div>
+
+    <div class="question">
+      <p>2️⃣ Cuando tenés un mal día laboral, ¿qué actitud de tu líder te ayuda más?</p>
+      <label><input type="radio" name="q2" value="A" required> A) Que me escuche con empatía y sin juzgarme</label>
+      <label><input type="radio" name="q2" value="B"> B) Que me recuerde el propósito de nuestro trabajo</label>
+      <label><input type="radio" name="q2" value="C"> C) Que me ayude a priorizar tareas para no abrumarme</label>
+      <label><input type="radio" name="q2" value="D"> D) Que confíe en que puedo resolverlo solo/a, pero esté disponible si lo necesito</label>
+    </div>
+
+    <div class="question">
+      <p>3️⃣ ¿Qué buscás en un/a buen/a líder?</p>
+      <label><input type="radio" name="q3" value="A" required> A) Que inspire con el ejemplo y dé sentido al trabajo</label>
+      <label><input type="radio" name="q3" value="B"> B) Que dé órdenes claras y recompense el esfuerzo</label>
+      <label><input type="radio" name="q3" value="C"> C) Que nos tenga en cuenta como personas, no solo como empleados</label>
+      <label><input type="radio" name="q3" value="D"> D) Que cree espacios para innovar y aprender del error</label>
+    </div>
+
+    <div class="question">
+      <p>4️⃣ ¿Qué te desmotiva más en un equipo de trabajo?</p>
+      <label><input type="radio" name="q4" value="A" required> A) No recibir feedback o reconocimiento</label>
+      <label><input type="radio" name="q4" value="B"> B) Que las decisiones se tomen sin consultar</label>
+      <label><input type="radio" name="q4" value="C"> C) Que haya favoritismos o desigualdad</label>
+      <label><input type="radio" name="q4" value="D"> D) Sentir que lo que hago no tiene impacto</label>
+    </div>
+
+    <div class="question">
+      <p>5️⃣ ¿Cómo reaccionás frente a un liderazgo autoritario y rígido?</p>
+      <label><input type="radio" name="q5" value="A" required> A) Me frustro y me cuesta dar lo mejor</label>
+      <label><input type="radio" name="q5" value="B"> B) Me adapto, pero no me siento comprometido/a</label>
+      <label><input type="radio" name="q5" value="C"> C) Me esfuerzo igual, aunque no me guste</label>
+      <label><input type="radio" name="q5" value="D"> D) Lo tolero si hay claridad, pero prefiero otra forma</label>
+    </div>
+
+    <div class="question">
+      <p>6️⃣ ¿Qué creés que podrían hacer los líderes de tu organización para aumentar tu motivación?</p>
+      <label><input type="radio" name="q6" value="A" required> A) Escuchar más y mostrarse cercanos</label>
+      <label><input type="radio" name="q6" value="B"> B) Ofrecer oportunidades de crecimiento o nuevos desafíos</label>
+      <label><input type="radio" name="q6" value="C"> C) Fomentar un ambiente de respeto y confianza</label>
+      <label><input type="radio" name="q6" value="D"> D) Reconocer el esfuerzo en público o con incentivos</label>
+    </div>
+
+    <button type="submit">Enviar y ver resultado</button>
+  </form>
+
+  <section id="result"></section>
+</main>
+
+<script>
+function showResult(message){
+    const resultBox=document.getElementById('result');
+    resultBox.style.display='block';
+    resultBox.innerHTML = '<h2>🔔 Tu resultado:</h2>' + message;
+}
+function getMessageForProfile(profile){
+    const messages={
+        'A':`<p><strong>Perfil A – Liderazgo empático y humano</strong><br>Te motiva el reconocimiento y la cercanía emocional. Buscá espacios donde se valore tu esfuerzo y se mantenga una comunicación abierta. A los líderes se les recomienda reforzar la inteligencia emocional.</p>`,
+        'B':`<p><strong>Perfil B – Liderazgo transaccional y estructurado</strong><br>Necesitás objetivos claros, recompensas definidas y seguimiento. Pedí retroalimentación frecuente y desafíos concretos. A los líderes se les sugiere establecer metas y celebrar los logros.</p>`,
+        'C':`<p><strong>Perfil C – Liderazgo transformacional y de servicio</strong><br>Valorás el sentido de pertenencia y el respeto. Proponé iniciativas colaborativas y espacios de diálogo. A los líderes se les aconseja fomentar la equidad y el clima humano.</p>`,
+        'D':`<p><strong>Perfil D – Liderazgo innovador y autónomo</strong><br>Te impulsa la autonomía y el desafío. Buscá proyectos creativos y oportunidades de aprendizaje. A los líderes se les recomienda brindar libertad y reconocer la iniciativa.</p>`,
+        'AB':`<p><strong>Perfil mixto A+B – Reconocimiento con estructura</strong><br>Necesitás líderes que equilibren la cercanía y la claridad en objetivos. Pedí feedback claro y guía cuando la necesites.</p>`,
+        'AC':`<p><strong>Perfil mixto A+C – Cercanía y buen clima</strong><br>El vínculo humano es clave, pero también la pertenencia al equipo. Buscá redes de confianza y propuestas colaborativas.</p>`,
+        'AD':`<p><strong>Perfil mixto A+D – Reconocimiento y crecimiento</strong><br>Te motivan los desafíos y que valoren tu esfuerzo. Proponé ideas nuevas y pedí visibilidad para tus logros.</p>`,
+        'BC':`<p><strong>Perfil mixto B+C – Justicia y organización</strong><br>Requiere líderes firmes y justos. Expresá tus necesidades sin confrontar y proponé mejoras de procesos.</p>`,
+        'BD':`<p><strong>Perfil mixto B+D – Metas y autonomía</strong><br>Querés libertad de acción una vez definidos los objetivos. Pedí claridad inicial y espacio para innovar.</p>`,
+        'CD':`<p><strong>Perfil mixto C+D – Propósito y desarrollo</strong><br>Buscás proyectos con sentido y oportunidad de crecer. Involucrate en decisiones estratégicas y sugerí mejoras.</p>`,
+        'EQ':`<p><strong>Perfil equilibrado – Motivación multifacética</strong><br>Valorás un poco de todo. Identificá qué es más importante ahora y comunicalo a tu líder. Necesitás líderes flexibles.</p>`
+    };
+    return messages[profile] || '<p>No se pudo determinar un perfil específico.</p>';
+}
+
+document.getElementById('surveyForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const data=new FormData(e.target);
+    const counts={A:0,B:0,C:0,D:0};
+    for(const val of data.values()){counts[val]++;}
+    const values=Object.values(counts);
+    const max=Math.max(...values);
+    const top=Object.keys(counts).filter(k=>counts[k]===max);
+    let profile='';
+    if(top.length===4){profile='EQ';}
+    else if(top.length===1){profile=top[0];}
+    else if(top.length===2){profile=top.sort().join('');} // e.g., AB, CD
+    else{profile='EQ';}
+    showResult(getMessageForProfile(profile));
+    window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+
+</body>
+</html>
